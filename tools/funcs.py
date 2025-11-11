@@ -18,14 +18,20 @@ colors:dict = {
 "red": Fore.RED,
 "yellow": Fore.YELLOW,
 "magenta":Fore.MAGENTA,
-"cyan": Fore.CYAN
+"cyan": Fore.CYAN,
+"lgreen": Fore.LIGHTGREEN_EX,
+"lblue": Fore.LIGHTBLUE_EX,
+"lred": Fore.LIGHTRED_EX,
+"lblack": Fore.LIGHTBLACK_EX,
+"lmagenta": Fore.LIGHTMAGENTA_EX,
+"lcyan": Fore.LIGHTCYAN_EX
 
 }
 
 
 # -- Functions -- #
 
-def typing_animation(text:str,delay:float=0.05,color:str="white",newline:bool=True)->None:  # Function to print with animation.
+def type(text:str,delay:float=0.05,color:str="white",newline:bool=True)->None:  # Function to print with animation.
 
     for char in text:              # Loop through each character in the input text
         
@@ -52,3 +58,13 @@ def clear()->None: # Function to clear the terminal
         os.system("cls") # Windows
     else:
         os.system("clear") # Linux and Macos
+
+#-- Test Side --#
+
+def test()->None:
+
+    for c in colors.keys():
+        
+        type("Hello World!",color=c,newline=False)
+        print("  ",c)
+
