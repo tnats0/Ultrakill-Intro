@@ -33,24 +33,18 @@ colors:dict = {
 
 def type(text:str,delay:float=0.05,color:str="white",newline:bool=True)->None:  # Function to print with animation.
 
-    for char in text:              # Loop through each character in the input text
-        
-        char = colors[color]+char  # Apply the specified color to the current character using the colors dictionary
-        
-        sys.stdout.write(char)     # Write the colored character to stdout without buffering
-        
-        sys.stdout.flush()         # Flush the output to ensure immediate display
-        
-        time.sleep(delay)          # Pause for the specified delay time between characters
+    for letter in text:
+        print(f"{colors[color] + letter}",end="")
+        time.sleep(delay)
 
-    if newline: print()            # If newline is True, print a newline to move to the next line
+    if newline: print("\n",end="")
 
 def deleting(charNum:int)->None:    # Function to delete a specified number of characters from the console output
     
-    sys.stdout.write(charNum*"\b")  # Move the cursor back by charNum positions using backspace characters
-    sys.stdout.write(charNum*" ")   # Overwrite the characters with spaces to clear them from the display
-    sys.stdout.write(charNum*"\b")  # Move the cursor back again to the original position after clearing
-    sys.stdout.flush()              # Flush the output buffer to ensure the changes are displayed immediately
+    print(charNum*"\b",end="")  # Move the cursor back by charNum positions using backspace characters
+    print(charNum*" ",end="")   # Overwrite the characters with spaces to clear them from the display
+    print(charNum*"\b",end="")  # Move the cursor back again to the original position after clearing
+    sys.stdout.flush()          # Flush the output buffer to ensure the changes are displayed immediately
 
 def clear()->None: # Function to clear the terminal
     
@@ -59,12 +53,4 @@ def clear()->None: # Function to clear the terminal
     else:
         os.system("clear") # Linux and Macos
 
-#-- Test Side --#
-
-def test()->None:
-
-    for c in colors.keys():
-        
-        type("Hello World!",color=c,newline=False)
-        print("  ",c)
 
