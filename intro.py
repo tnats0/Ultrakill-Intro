@@ -1,9 +1,9 @@
-from tools import *
+from funcs import *
 
 
 # -- Intro -- #
 
-def boot_up_sequence()->None: # First part of the intro
+def boot_up_sequence(): 
 
     # -- Boot Up Sequence -- #
 
@@ -34,7 +34,7 @@ def boot_up_sequence()->None: # First part of the intro
 
     print()
 
-def status_update()->None: # Second part of the intro
+def status_update(): # Second part of the intro
 
     type("STATUS UPDATE:")
     time.sleep(1)
@@ -53,7 +53,7 @@ def status_update()->None: # Second part of the intro
 
     print()
 
-def final_lines()->None: # Final part of the intro
+def final_lines(): # Final part of the intro
 
     type("MANKIND IS DEAD.",color="red")
     time.sleep(1)
@@ -61,7 +61,7 @@ def final_lines()->None: # Final part of the intro
     time.sleep(1)
     type("HELL IS FULL.",color="red")
 
-def ultrakill_intro()->None: # All in one
+def ultrakill_intro(): # All in one
 
     print("\033[?25l")
 
@@ -83,7 +83,7 @@ def ultrakill_intro()->None: # All in one
 
     time.sleep(5)
 
-    print("\033[?25l")
+    print("\033[?25h")
 
 # -- Test Side -- #
 
