@@ -3,6 +3,14 @@
 import os
 import sys
 import time
+import random
+
+from rich.console import *
+from rich.theme import *
+from rich.panel import *
+from rich.live import *
+from rich.text import *
+
 
 from colorama import *
 
@@ -10,31 +18,69 @@ init(autoreset=True)
 
 # -- Variables and Iterables -- #
 
+
+console = Console(highlight=False,color_system="windows")
+
+red = "Bold Red"
+
+green = "Bold Green"
+
+white = "Bold White"
+
+
 colors:dict = {
 
-"white":Fore.WHITE,
-"blue": Fore.BLUE,
-"green": Fore.GREEN,
-"red": Fore.RED,
-"yellow": Fore.YELLOW,
-"magenta":Fore.MAGENTA,
-"cyan": Fore.CYAN,
-"lgreen": Fore.LIGHTGREEN_EX,
-"lblue": Fore.LIGHTBLUE_EX,
-"lred": Fore.LIGHTRED_EX,
-"lblack": Fore.LIGHTBLACK_EX,
-"lmagenta": Fore.LIGHTMAGENTA_EX,
-"lcyan": Fore.LIGHTCYAN_EX
+"white":white,
+"green": green,
+"red": red,
 
 }
 
 
 # -- Functions -- #
 
+def generate_letter():
+
+    letter = chr(random.randint(65,122))
+
+    return letter
+
+def cool_type(input_text:str,color)->None:  # Function to print with animation.
+
+    with Live(generate_letter(),refresh_per_second=40) as live:
+
+        count = 0
+        real_count = 0
+
+        while real_count < len(input_text):
+
+                real_count += 1
+                count = 0
+
+                while count <= 10:
+
+                    letters = []
+
+                    text = ""
+
+                    for i in range(len(input_text)):
+
+                        if i < real_count:
+                            letters.append(input_text[i])
+                        else:
+                            letters.append(generate_letter())
+
+                    text = "".join(letters)
+
+                    live.update(Text.from_markup(text,style=color))
+                    time.sleep(0.05)
+                    count += 1
+
+
 def type(text:str,delay:float=0.05,color:str="white",newline:bool=True)->None:  # Function to print with animation.
 
     for letter in text:
-        print(f"{colors[color] + letter}",end="")
+        console.print(letter,style=colors[color],end="")
         time.sleep(delay)
 
     if newline: print("\n",end="")

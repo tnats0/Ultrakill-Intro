@@ -8,7 +8,7 @@ def boot_up_sequence():
     # -- Boot Up Sequence -- #
 
     
-    type("BOOT UP SEQUENCE...",newline=False)
+    cool_type("BOOT UP SEQUENCE...",newline=False)
     time.sleep(1)
     deleting(3)
     type(" READY")
@@ -55,11 +55,11 @@ def status_update(): # Second part of the intro
 
 def final_lines(): # Final part of the intro
 
-    type("MANKIND IS DEAD.",color="red")
+    cool_type("MANKIND IS DEAD.",colors["red"])
     time.sleep(1)
-    type("BLOOD IS FUEL.",color="red")
+    cool_type("BLOOD IS FUEL.",colors["red"])
     time.sleep(1)
-    type("HELL IS FULL.",color="red")
+    cool_type("HELL IS FULL.",colors["red"])
 
 def ultrakill_intro(): # All in one
 
@@ -87,4 +87,4 @@ def ultrakill_intro(): # All in one
 
 # -- Test Side -- #
 
-ultrakill_intro() 
+final_lines()
