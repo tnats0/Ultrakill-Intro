@@ -3,41 +3,96 @@
 import os
 import sys
 import time
+import random
 
-from colorama import *
-
-init(autoreset=True)
+from rich.console import *
+from rich.theme import *
+from rich.text import *
 
 # -- Variables and Iterables -- #
 
-colors:dict = {
+console = Console(highlight=False,color_system="windows")
 
-"white":Fore.WHITE,
-"blue": Fore.BLUE,
-"green": Fore.GREEN,
-"red": Fore.RED,
-"yellow": Fore.YELLOW,
-"magenta":Fore.MAGENTA,
-"cyan": Fore.CYAN,
-"lgreen": Fore.LIGHTGREEN_EX,
-"lblue": Fore.LIGHTBLUE_EX,
-"lred": Fore.LIGHTRED_EX,
-"lblack": Fore.LIGHTBLACK_EX,
-"lmagenta": Fore.LIGHTMAGENTA_EX,
-"lcyan": Fore.LIGHTCYAN_EX
+
+styles = {
+
+    "green":"b Green",
+    "red":"b Red",
+    "red-u":"b Red u",
+    "red-s":"b red s",
+    "default":"b White",
+
 
 }
 
-
 # -- Functions -- #
 
-def type(text:str,delay:float=0.05,color:str="white",newline:bool=True)->None:  # Function to print with animation.
+def generate_text(charNum:int):
+
+    text = ""
+
+    for _ in range(charNum):
+        letter = chr(random.randint(65,122))
+        text += letter
+
+    return text
+
+def generate_glitch_string(length: int) -> str:
+    chars = "!@#$%^&*()_+-=[]{}|;:,.<>?/░▒▓█"
+    return "".join(random.choice(chars) for _ in range(length))
+
+def glitch_type(text1:Text,text2:Text,typing,newline:bool=True):
+
+    typing(text1,newline=False)
+    
+    time.sleep(0.5)
+
+    glitched_text = Text(generate_glitch_string(len(text1)),style="bold white on red")
+
+    deleting(len(text1))
+
+    console.print(glitched_text,end="")
+
+    time.sleep(0.1)
+
+    deleting(len(text1))
+
+    console.print(text2,end="")
+
+    if newline: console.print("")
+
+
+def cool_type(input_text:Text,speed:int=5,newline:bool=True):
+
+    real_count,count = 0,0
+
+    while real_count < len(input_text):
+
+        count = 0
+        real_count += 1
+
+        while count <= speed:
+
+            deleting(len(input_text))
+
+            text = input_text[0:real_count] + generate_text(len(input_text)-real_count)
+
+            console.print(text,style=input_text.style,end="")
+            time.sleep(0.05)
+
+            count +=1
+
+    if newline:console.print("")
+
+
+def type(text:Text,delay:float=0.05,newline:bool=True)->None:  # Function to print with animation.
 
     for letter in text:
-        print(f"{colors[color] + letter}",end="")
+        console.print(letter,style=text.style,end="")
         time.sleep(delay)
 
-    if newline: print("\n",end="")
+    if newline: console.print("")
+
 
 def deleting(charNum:int)->None:    # Function to delete a specified number of characters from the console output
     
@@ -52,5 +107,4 @@ def clear()->None: # Function to clear the terminal
         os.system("cls") # Windows
     else:
         os.system("clear") # Linux and Macos
-
 
