@@ -62,7 +62,7 @@ def glitch_type(text1:Text,text2:Text,typing,newline:bool=True):
     if newline: console.print("")
 
 
-def cool_type(input_text:Text,speed:int=5,newline:bool=True):
+def decryption(input_text:Text,speed:int=5,newline:bool=True):
 
     real_count,count = 0,0
 

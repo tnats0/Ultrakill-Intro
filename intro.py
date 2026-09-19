@@ -84,7 +84,7 @@ def final_lines(): # Final part of the intro
 
     for line in lines:
 
-        cool_type(line)
+        decryption(line)
         time.sleep(1)
 
 
