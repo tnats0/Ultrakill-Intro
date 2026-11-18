@@ -15,4 +15,4 @@ You are free to use, modify, and distribute this software with attribution.
 ## ✨ Author
 
 Tuna (@tnats0)
-Feel free to open issues or pull requests for improvements and suggestions
+Feel free to open issues or pull requests for improvements and suggestions.
